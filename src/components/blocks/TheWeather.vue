@@ -40,7 +40,7 @@ const currentDayForecast = computed(() => {
 
   &__common {
     @include media('s') {
-      row-gap: 6vh;
+      row-gap: 5vh;
     }
 
     display: flex;
