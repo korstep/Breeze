@@ -1,0 +1,54 @@
+@import "@/assets/styles/base/variables.css";
+@import "@/assets/styles/ui/typography";
+
+html, body, div#app {
+  height: 100%;
+}
+
+img {
+  width: 100%;
+  height: 100%
+}
+
+svg.icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-common);
+
+  &--is-active {
+    fill: var(--text-acceted)
+  }
+}
+
+main {
+  width: 100%;
+  height: 100%;
+}
+
+h1 {
+  @include heading-h1;
+
+  color: var(--text-acceted)
+}
+
+h2 {
+  @include heading-h2;
+
+  color: var(--text-acceted)
+}
+
+h3 {
+  @include heading-h3;
+
+  color: var(--text-acceted)
+}
+
+body {
+  @include text;
+
+  color: var(--text-common)
+}
+
+small {
+  @include text-small;
+}
