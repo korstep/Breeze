@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TheWeather from '@/components/blocks/TheWeather.vue'
 import TodaysForecast from '@/components/blocks/TodaysForecast.vue'
-import NextDaysForecast from '@/components/blocks/NextDaysForecast.vue'
+import NextDaysForecast from '@/components/blocks/NextDaysForecast/NextDaysForecast.vue'
 </script>
 
 <template>
@@ -16,5 +16,6 @@ import NextDaysForecast from '@/components/blocks/NextDaysForecast.vue'
 .main {
   display: flex;
   flex-direction: column;
+  row-gap: 8vh;
 }
 </style>
