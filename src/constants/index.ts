@@ -1,1 +1,1 @@
-export const nominatimOpenStreetMapUrl: string = 'https://nominatim.openstreetmap.org/'
+export const weatherApiUrl = 'http://api.weatherapi.com/v1/forecast.json'
