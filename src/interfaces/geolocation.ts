@@ -4,9 +4,3 @@ export interface GeolocationPosition {
     latitude: number
   }
 }
-
-export interface GeolocationInfo {
-  address: {
-    city: string
-  }
-}
