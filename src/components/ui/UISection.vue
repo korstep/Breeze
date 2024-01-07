@@ -9,9 +9,9 @@
 </template>
 
 <style scoped lang="scss">
-section.section {
+.section {
   background-color: var(--background-second);
-  border-radius: 22px;
+  border-radius: 16px;
 
   &__body {
     padding: 25px;
