@@ -1,0 +1,17 @@
+@import 'https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap';
+
+:root {
+    /* fonts */
+    --font-first: 'Rubik', sans-serif;
+
+    /* background colors */
+    --background-first: rgb(245 245 245);
+    --background-second: rgb(234 236 239);
+
+    /* text colors */
+    --text-acceted: #202b3bff;
+    --text-common: #9399a2ff;
+    --text-third: #35455E;
+
+}
+
