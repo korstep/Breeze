@@ -19,3 +19,13 @@ const iconComponent = computed(() => icons[name])
 <template>
   <Component :is="iconComponent" class="icon" />
 </template>
+
+<style lang="scss">
+.icon {
+  fill: var(--text-common);
+
+  &--is-active {
+    fill: var(--text-acceted);
+  }
+}
+</style>

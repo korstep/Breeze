@@ -51,7 +51,7 @@ interface Forecast {
   forecastday: Forecastday[]
 }
 
-interface Forecastday {
+export interface Forecastday {
   date: string
   date_epoch: number
   day: Day
@@ -93,7 +93,7 @@ interface Astro {
   is_sun_up: number
 }
 
-interface Hour {
+export interface Hour {
   time_epoch: number
   time: string
   temp_c: number

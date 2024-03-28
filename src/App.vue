@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
 import useStore from '@/stores'
 
 const store = useStore()
@@ -11,10 +11,21 @@ const isWeatherDataValid = computed(() => {
 })
 
 onMounted(async () => {
-  store.setDeviceType()
+  onResize()
+  document.addEventListener('resize', onResize)
   await store.setGeolocation()
   await store.setWeatherData()
 })
+
+onUnmounted(() => {
+  document.removeEventListener('resize', onResize)
+})
+
+function onResize() {
+  const { innerWidth, innerHeight } = window
+  store.setDeviceType(innerWidth)
+  store.setOrientation(innerWidth, innerHeight)
+}
 </script>
 
 <template>

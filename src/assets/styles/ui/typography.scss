@@ -1,44 +1,44 @@
 @import "@/assets/styles/base/variables.css";
 
-@mixin heading-h1() {
+@mixin text-xxl() {
   font-family: var(--font-first);
-  font-size: 3rem;
+  font-size: calc(var(--font-size) * 3);
   font-weight: bold;
   line-height: 120%;
   letter-spacing: 0;
   white-space: pre-line;
 }
 
-@mixin heading-h2() {
+@mixin text-xl() {
   font-family: var(--font-first);
-  font-size: 2rem;
+  font-size: calc(var(--font-size) * 2);
   font-weight: bold;
   line-height: 120%;
   letter-spacing: 0;
   white-space: pre-line;
 }
 
-@mixin heading-h3() {
+@mixin text-l() {
   font-family: var(--font-first);
-  font-size: 1.5rem;
+  font-size: calc(var(--font-size) * 1.5);
   font-weight: bold;
   line-height: 125%;
   letter-spacing: 0;
   white-space: pre-line;
 }
 
-@mixin text() {
+@mixin text-m() {
   font-family: var(--font-first);
-  font-size: 1rem;
+  font-size: var(--font-size);
   font-weight: normal;
   line-height: 137.5%;
   letter-spacing: 0;
   white-space: pre-line;
 }
 
-@mixin text-small() {
+@mixin text-s() {
   font-family: var(--font-first);
-  font-size: 0.75rem;
+  font-size: calc(var(--font-size) * 0.75);
   font-weight: bold;
   line-height: 150%;
   text-transform: uppercase;

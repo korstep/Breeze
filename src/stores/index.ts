@@ -2,29 +2,32 @@ import { defineStore } from 'pinia'
 import type { IStoreState } from '@/interfaces/state'
 import getCurrentPosition from '@/helpers/geolocation'
 import ky from 'ky'
-import { weatherApiUrl } from '@/constants'
+import { weatherApiUrl } from '@/constants/api'
+import { devices, getDeviceByWidth } from '@/constants/devices'
+import orientation from '@/constants/orientation'
 
 export const useStore = defineStore('store', {
   state: () =>
     <IStoreState>{
       deviceType: '',
+      orientation: '',
       position: {},
       weatherData: {}
     },
   actions: {
     setDeviceType(): void {
       const updateDeviceType = () => {
-        const width = window.innerWidth
-        if (width <= 480) {
-          this.deviceType = 'mobile'
-        } else if (width < 1280) {
-          this.deviceType = 'tablet'
-        } else {
-          this.deviceType = 'desktop'
-        }
+        this.deviceType = getDeviceByWidth(window.innerWidth)
       }
       window.addEventListener('resize', updateDeviceType)
       updateDeviceType()
+    },
+    setOrientation(): void {
+      const updateDeviceOrientation = () => {
+        this.orientation = window.innerWidth < window.innerHeight ? orientation.VERTICAL : orientation.HORIZONTAL
+      }
+      window.addEventListener('resize', updateDeviceOrientation)
+      updateDeviceOrientation()
     },
     async setGeolocation(): Promise<void> {
       const { latitude, longitude } = (await getCurrentPosition()).coords
@@ -50,13 +53,13 @@ export const useStore = defineStore('store', {
   },
   getters: {
     isMobile(): boolean {
-      return this.deviceType === 'mobile'
+      return this.deviceType === devices.MOBILE
     },
     isTablet(): boolean {
-      return this.deviceType === 'tablet'
+      return this.deviceType === devices.TABLET
     },
     isDesktop(): boolean {
-      return this.deviceType === 'desktop'
+      return this.deviceType === devices.DESKTOP
     }
   }
 })

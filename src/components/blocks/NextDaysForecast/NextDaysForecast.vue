@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UISection from '@/components/ui/UISection.vue'
+import UISection from '@/components/shared/UISection.vue'
 import useStore from '@/stores'
 import NextDaysForecastItem from '@/components/blocks/NextDaysForecast/Item/NextDaysForecastItem.vue'
 import { computed } from 'vue'
@@ -11,10 +11,9 @@ const nDaysForecast = computed(() => {
 </script>
 
 <template>
-  <UISection>
+  <UISection :title="`${nDaysForecast.length}-day's forecast`">
     <div class="next-days-forecast">
       <div class="next-days-forecast__body">
-        <small class="next-days-forecast__title">{{ nDaysForecast.length }}-day forecast</small>
         <NextDaysForecastItem
           class="next-days-forecast__item"
           v-for="item in nDaysForecast"
@@ -35,10 +34,6 @@ const nDaysForecast = computed(() => {
   &__body {
     display: flex;
     flex-direction: column;
-  }
-
-  &__title {
-    margin-bottom: 1vh;
   }
 
   &__item {
