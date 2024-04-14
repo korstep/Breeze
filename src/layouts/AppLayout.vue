@@ -1,51 +1,23 @@
-<script setup lang="ts">
-import useStore from '@/stores'
-import TheNavigation from '@/components/blocks/TheNavigation/TheNavigation.vue'
-import { onMounted, onUnmounted, ref } from 'vue'
-
-const store = useStore()
-
-const navigation = ref<InstanceType<typeof TheNavigation>>()
-const navigationHeight = ref('0px')
-
-const layoutStyle = ref({
-  '--navigation-height': navigationHeight
-})
-
-const updateStyles = function () {
-  navigationHeight.value = `${navigation.value?.$el?.offsetHeight ?? 0}px`
-}
-
-onMounted(() => {
-  window.addEventListener('resize', updateStyles)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('resize', updateStyles)
-})
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="app-layout" :style="layoutStyle">
-    <Teleport to="#app" :disabled="store.isDesktop">
-      <TheNavigation ref="navigation" />
-    </Teleport>
+  <div class="app-layout">
     <router-view></router-view>
   </div>
 </template>
 
 <style lang="scss">
 .app-layout {
-  $layout-padding: 2.5vw;
+  --app-layout-padding: 2.5vw;
 
-  padding: $layout-padding $layout-padding calc($layout-padding + var(--navigation-height));
+  min-height: calc(100% - var(--app-layout-padding) * 2);
+  padding: var(--app-layout-padding);
+  display: flex;
 
-  @include media('>m') {
-    $layout-padding: 2vw;
+  @include media('>sm') {
+    overflow: hidden;
 
-    display: flex;
-    column-gap: 1.5vw;
-    padding: $layout-padding;
+    --app-layout-padding: 2vw;
   }
 }
 </style>

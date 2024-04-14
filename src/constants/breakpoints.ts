@@ -1,4 +1,4 @@
-export default {
+const breakpoints: { [key: string]: number } = {
   xxs: 480,
   xs: 576,
   s: 768,
@@ -7,3 +7,5 @@ export default {
   l: 1440,
   xl: 192
 }
+
+export default breakpoints

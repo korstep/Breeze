@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import UISection from '@/components/shared/UISection.vue'
 import UIButton from '@/components/shared/UIButton.vue'
-import useStore from '@/stores'
+import useCommonStore from '@/stores/common/common'
 import { computed } from 'vue'
 import AirConditionsItem from '@/components/blocks/AirConditions/Item/AirConditionsItem.vue'
 import UICaption from '@/components/shared/UICaption.vue'
 import sizes from '@/constants/sizes'
 
-const store = useStore()
+const store = useCommonStore()
 
 const currentWeather = computed(() => {
   return store.weatherData.current
@@ -62,7 +62,6 @@ const airConditions = [
 
   &__button {
     justify-self: end;
-    border-radius: 24px;
   }
 }
 </style>

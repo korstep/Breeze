@@ -1,35 +1,18 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted } from 'vue'
-import useStore from '@/stores'
+import { onMounted, onUnmounted } from 'vue'
+import useCommonStore from '@/stores/common/common'
 
-const store = useStore()
-
-const isWeatherDataValid = computed(() => {
-  return (
-    store.weatherData && 'location' in store.weatherData && 'current' in store.weatherData && 'forecast' in store.weatherData
-  )
-})
+const store = useCommonStore()
 
 onMounted(async () => {
-  onResize()
-  document.addEventListener('resize', onResize)
-  await store.setGeolocation()
-  await store.setWeatherData()
+  store.addListeners()
 })
 
 onUnmounted(() => {
-  document.removeEventListener('resize', onResize)
+  store.removeListeners()
 })
-
-function onResize() {
-  const { innerWidth, innerHeight } = window
-  store.setDeviceType(innerWidth)
-  store.setOrientation(innerWidth, innerHeight)
-}
 </script>
 
 <template>
-  <router-view v-if="isWeatherDataValid"></router-view>
+  <router-view></router-view>
 </template>
-
-<style lang="scss"></style>

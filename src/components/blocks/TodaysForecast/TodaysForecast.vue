@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import UISection from '@/components/shared/UISection.vue'
-import useStore from '@/stores'
+import useCommonStore from '@/stores/common/common'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import type { Hour } from '@/interfaces/weatherData'
 import TodaysForecastItem from '@/components/blocks/TodaysForecast/Item/TodaysForecastItem.vue'
 
-const store = useStore()
+const store = useCommonStore()
 const windowWidth = ref(0)
 
 onMounted(() => {
@@ -24,7 +24,7 @@ const getTodaysForecastArr = computed(() => {
   const interval = 3
   const todaysHours = store.weatherData.forecast.forecastday[0].hour
   const currentHour = new Date().getHours()
-  const itemsCount = store.isMobile ? 3 : 0 ||  ? 5 : 0 || store.isDesktop ? 6 : 0
+  const itemsCount = store.isMobile ? 3 : 0 || store.isTablet ? 5 : 0 || store.isDesktop ? 6 : 0
 
   const filteredTodayHours = filterByInterval(todaysHours, currentHour, interval)
 
@@ -66,7 +66,7 @@ function ensureMinimumItems(filteredHours: Hour[], itemsCount: number, interval:
 <style scoped lang="scss">
 .todays-forecast {
   display: flex;
-  padding-top: 1vh;
+  padding-top: 1dvh;
 
   &__item {
     flex: 1;

@@ -8,8 +8,7 @@ export const devices: { [key: string]: string } = {
 
 const devicesMap: { [key: string]: number } = {
   [devices.MOBILE]: breakpoints.xxs,
-  [devices.TABLET]: breakpoints.m,
-  [devices.DESKTOP]: breakpoints.xl
+  [devices.TABLET]: breakpoints.sm
 }
 
 export function getDeviceByWidth(width: number): string {

@@ -1,6 +1,8 @@
 import type { IWeatherData } from '@/interfaces/weatherData'
 
 export interface IStoreState {
+  windowWidth: number
+  windowHeight: number
   deviceType: string
   orientation: string
   position: {
@@ -8,4 +10,7 @@ export interface IStoreState {
     latitude: number
   }
   weatherData: IWeatherData
+  isEnabledNotifications: boolean
+  isEnabledTwelveHoursTimeType: boolean
+  isEnabledWeatherByLocation: boolean
 }

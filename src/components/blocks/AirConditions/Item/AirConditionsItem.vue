@@ -3,9 +3,9 @@ import { defineProps } from 'vue'
 import UIIcon from '@/components/shared/UIIcon.vue'
 import UICaption from '@/components/shared/UICaption.vue'
 import sizes from '@/constants/sizes'
-import useStore from '@/stores'
+import useCommonStore from '@/stores/common/common'
 
-const { isMobile } = useStore()
+const { isMobile } = useCommonStore()
 
 const props = defineProps({
   title: {

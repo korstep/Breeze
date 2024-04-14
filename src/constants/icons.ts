@@ -10,6 +10,7 @@ import IconUv from '@/assets/icons/uv.svg'
 import IconVisibility from '@/assets/icons/visibility.svg'
 import IconWeather from '@/assets/icons/weather.svg'
 import IconWind from '@/assets/icons/wind.svg'
+import IconArrow from '@/assets/icons/arrow.svg'
 
 const icons: { [key: string]: string } = {
   feels: IconFeels,
@@ -23,6 +24,7 @@ const icons: { [key: string]: string } = {
   uv: IconUv,
   visibility: IconVisibility,
   weather: IconWeather,
-  wind: IconWind
+  wind: IconWind,
+  arrow: IconArrow
 }
 export default icons

@@ -35,7 +35,7 @@ const getTime = computed(() => {
 .todays-forecast-item {
   display: flex;
   flex-direction: column;
-  row-gap: 2.3vh;
+  row-gap: 2.3dvh;
   align-items: center;
 
   &__temperature {

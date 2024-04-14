@@ -7,13 +7,17 @@ const { title } = defineProps({
   title: {
     type: String,
     default: ''
+  },
+  isHideHead: {
+    type: Boolean,
+    default: false
   }
 })
 </script>
 
 <template>
   <div class="section">
-    <div class="section__head">
+    <div class="section__head" v-if="!isHideHead">
       <UICaption class="section__title" v-if="title" weight="bold" :size="sizes.S" uppercase>{{ title }}</UICaption>
       <slot name="head" />
     </div>
@@ -25,12 +29,9 @@ const { title } = defineProps({
 
 <style lang="scss">
 .section {
-  display: grid;
-  grid-template: repeat(2, auto) / repeat(2, auto);
-  grid-template-areas:
-    'head head'
-    'body body';
-  row-gap: 1.5vh;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5dvh;
   padding: 5vw;
   background-color: var(--background-second);
   border-radius: 1rem;
@@ -39,8 +40,8 @@ const { title } = defineProps({
     padding: 3.5vw;
   }
 
-  @include media('>m') {
-    padding: 2.5vw;
+  @include media('>sm') {
+    padding: 2vw;
   }
 
   @include media('>l') {

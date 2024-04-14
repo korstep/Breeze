@@ -18,6 +18,10 @@ const props = defineProps({
   noWrap: {
     type: Boolean,
     default: false
+  },
+  isAccented: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -26,7 +30,8 @@ const captionModifiers = computed(() => {
     (props.uppercase || props.size === sizes.S) && 'shared-caption--uppercase',
     props.size && `ui-caption--${props.size}`,
     props.weight && `ui-caption--${props.weight}`,
-    props.noWrap && 'shared-caption--no-wrap'
+    props.noWrap && 'ui-caption--no-wrap',
+    props.isAccented && 'ui-caption--accented'
   ]
 })
 </script>
@@ -75,6 +80,10 @@ const captionModifiers = computed(() => {
 
   &--normal {
     font-weight: normal;
+  }
+
+  &--accented {
+    color: var(--text-acceted);
   }
 }
 </style>

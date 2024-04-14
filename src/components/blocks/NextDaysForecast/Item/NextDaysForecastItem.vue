@@ -41,7 +41,7 @@ const formattedDay = computed(() => {
   display: grid;
   grid-template: auto / 25% auto fit-content(100%);
   align-items: center;
-  padding: 1vh 0;
+  padding: 1dvh 0;
 
   &__day {
     overflow: hidden;

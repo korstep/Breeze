@@ -7,7 +7,8 @@
     /* background colors */
     --background-first: rgb(245 245 245);
     --background-second: rgb(234 236 239);
-    --background-third: rgb(221 224 228);
+    --background-third: #DDE0E4;
+    --background-fourth: #C4CAD3;
 
     /* text colors */
     --text-acceted: #202b3bff;
