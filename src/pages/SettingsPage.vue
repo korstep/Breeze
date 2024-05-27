@@ -1,57 +1,52 @@
 <script setup lang="ts">
-import UICaption from '@/components/shared/UICaption.vue'
-import sizes from '@/constants/sizes'
-import { GeneralSettings, NotificationsSettings, UnitsSettings } from '@/components/blocks/Settings'
-import { onMounted, onUnmounted, ref } from 'vue'
-import TheNavigation from '@/components/blocks/TheNavigation/TheNavigation.vue'
+import UICaption from '@/shared/components/UICaption.vue'
+import sizes from '@/shared/constants/sizes'
+import { TheSettings } from '@/modules/Settings'
+import { useSharedStore } from '@/shared/store'
+import TheSubscription from '@/modules/Subscription/TheSubscription.vue'
+import SignUpBanner from '@/modules/Account/SignUpBanner.vue'
+import ThePage from '@/pages/base/ThePage.vue'
 
-const navigation = ref<InstanceType<typeof TheNavigation>>()
-const navigationHeight = ref('0px')
-
-const layoutStyle = ref({
-  '--navigation-height': navigationHeight
-})
-
-const updateStyles = function () {
-  navigationHeight.value = `${navigation.value?.$el?.offsetHeight ?? 0}px`
-}
-
-onMounted(() => {
-  updateStyles()
-  window.addEventListener('resize', updateStyles)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('resize', updateStyles)
-})
+const { isDesktop } = useSharedStore()
 </script>
 
 <template>
-  <div class="settings" :style="layoutStyle">
-    <TheNavigation class="main__navigation" ref="navigation" />
-    <UICaption :size="sizes.XL" is-accented>Settings</UICaption>
-    <UnitsSettings class="settings__units" />
-    <NotificationsSettings class="settings__notifications" />
-    <GeneralSettings class="settings__general" />
-  </div>
+  <ThePage show-navigation>
+    <div class="settings">
+      <div class="settings__main">
+        <UICaption v-if="!isDesktop" :size="sizes.XL" is-accented>Settings</UICaption>
+        <TheSettings />
+      </div>
+      <div v-if="isDesktop" class="settings__additional">
+        <TheSubscription />
+        <SignUpBanner />
+      </div>
+    </div>
+  </ThePage>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .settings {
   display: flex;
   flex-direction: column;
-  row-gap: 4dvh;
-  padding-bottom: var(--navigation-height);
-  flex: 1;
+  row-gap: var(--page-row-gap);
 
   @include media('>sm') {
     display: grid;
-    grid-template: auto repeat(2, fit-content(100%)) / auto 2.1fr 1fr;
-    grid-template-areas:
-      'navigation weather forecast'
-      'navigation today forecast'
-      'navigation conditions forecast';
-    grid-gap: 3dvh 1.5vw;
+    grid-template: auto / 1.8fr 1fr;
+    grid-template-areas: 'main additional';
+    grid-gap: var(--page-row-gap) var(--page-column-gap);
+    padding-bottom: 0;
+
+    &__main {
+      overflow: auto;
+    }
+  }
+
+  &__additional {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.5dvh;
   }
 }
 </style>

@@ -11,7 +11,7 @@
     --background-fourth: #C4CAD3;
 
     /* text colors */
-    --text-acceted: #202b3bff;
+    --text-accented: #202b3bff;
     --text-common: #9399a2ff;
     --text-third: #35455E;
 
@@ -20,5 +20,5 @@
 
     /* button text colors */
     --button-text-first: rgb(245 245 245);;
-}
 
+}

@@ -2,20 +2,28 @@
 
 
 html {
-  --font-size: 16px;
+  font-size: 16px;
+  color: var(--text-common);
 
-  @include media('>xxs') {
-    --font-size: 20px;
+  @include media('>xxs', '<=sm') {
+    font-size: 20px;
+  }
+
+  @include media('>=l') {
+    font-size: 20px;
+  }
+
+  @include media('>xl') {
+    font-size: 1.1dvw;
   }
 }
 
-html, body {
-  height: 100%;
+html, body, div#app {
+  height: fit-content;
 }
 
 body {
   display: flex;
-  color: var(--text-common);
 }
 
 div#app {

@@ -8,16 +8,15 @@
 
 <style lang="scss">
 .app-layout {
-  --app-layout-padding: 2.5vw;
+  --app-layout-padding: 2.25dvw;
 
-  min-height: calc(100% - var(--app-layout-padding) * 2);
+  height: fit-content;
   padding: var(--app-layout-padding);
-  display: flex;
 
   @include media('>sm') {
-    overflow: hidden;
+    height: calc(100dvh - var(--app-layout-padding) * 2);
 
-    --app-layout-padding: 2vw;
+    --app-layout-padding: 1.75dvw;
   }
 }
 </style>

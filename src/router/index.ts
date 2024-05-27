@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { routeNames } from '@/router/constants/routeNames'
 import AppLayout from '@/layouts/AppLayout.vue'
-// import { useCommonStore } from '@/stores/index'
-import SettingsPage from '@/pages/SettingsPage.vue'
+import { useSharedStore } from '@/shared/store'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,36 +10,27 @@ const router = createRouter({
       path: '/',
       component: AppLayout,
       children: [
-        { path: '', component: () => import('@/pages/WelcomePage.vue'), name: 'welcome' },
-        { path: 'main', component: () => import('@/pages/MainPage.vue'), name: 'main' }
-        // { path: 'settings', component: () => import('@/pages/SettingsPage.vue'), name: 'settings' }
+        { path: '/', component: () => import('@/pages/WelcomePage.vue'), name: routeNames.welcome },
+        {
+          path: '/main',
+          component: () => import('@/pages/MainPage.vue'),
+          name: routeNames.main,
+          meta: { requiresWeatherData: true }
+        },
+        { path: '/cities', component: () => import('@/pages/CitiesPage.vue'), name: routeNames.cities },
+        { path: '/settings', component: () => import('@/pages/SettingsPage.vue'), name: routeNames.settings }
       ]
-    },
-    {
-      path: '/settings',
-      component: SettingsPage,
-      name: 'settings'
     }
   ]
 })
 
-// router.beforeResolve(async () => {
-//   console.log('beforeResolve')
-// })
-// router.beforeEach(async (to, __, next) => {
-//   console.log('beforeEach')
-//   const store = useCommonStore()
-//   if (
-//     to.name !== 'welcome' &&
-//     store.weatherData &&
-//     'location' in store.weatherData &&
-//     'current' in store.weatherData &&
-//     'forecast' in store.weatherData
-//   ) {
-//     next()
-//   } else {
-//     next({ name: 'welcome' })
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  const requiresWeatherData = to.matched.some((record) => record.meta.requiresWeatherData)
+  const { isWeatherDataValid } = useSharedStore()
+  if (requiresWeatherData && !isWeatherDataValid) {
+    next({ name: routeNames.welcome })
+  }
 
+  next()
+})
 export default router

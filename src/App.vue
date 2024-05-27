@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue'
-import useCommonStore from '@/stores/common/common'
+import { useSharedStore } from '@/shared/store'
 
-const store = useCommonStore()
+const sharedStore = useSharedStore()
 
-onMounted(async () => {
-  store.addListeners()
+onMounted(() => {
+  sharedStore.addListeners()
 })
 
 onUnmounted(() => {
-  store.removeListeners()
+  sharedStore.removeListeners()
 })
 </script>
 

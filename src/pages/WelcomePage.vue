@@ -1,64 +1,61 @@
 <script setup lang="ts">
-import UIButton from '@/components/shared/UIButton.vue'
-import UICaption from '@/components/shared/UICaption.vue'
-import useCommonStore from '@/stores/common/common'
-import sizes from '@/constants/sizes'
-import UIIcon from '@/components/shared/UIIcon.vue'
-import { computed, onMounted } from 'vue'
-import router from '@/router/index'
+import UIButton from '@/shared/components/UIButton.vue'
+import UICaption from '@/shared/components/UICaption.vue'
+import sizes from '@/shared/constants/sizes'
+import UIIcon from '@/shared/components/UIIcon.vue'
+import { onMounted } from 'vue'
+import index from '@/router'
+import { useSharedStore } from '@/shared/store'
+import ThePage from '@/pages/base/ThePage.vue'
+import { routeNames } from '@/router/constants/routeNames'
 
-const store = useCommonStore()
+const store = useSharedStore()
 
 onMounted(async () => {
-  if (!isWeatherDataValid.value) {
+  if (!store.isWeatherDataValid) {
     await store.setGeolocation()
     await store.setWeatherData()
   }
 })
 
 const goToMainPage = function () {
-  router.push({ name: 'main' })
+  index.push({ name: routeNames.main })
 }
-
-const isWeatherDataValid = computed(() => {
-  return (
-    store.weatherData && 'location' in store.weatherData && 'current' in store.weatherData && 'forecast' in store.weatherData
-  )
-})
 </script>
 
 <template>
-  <div class="welcome">
-    <div class="welcome__poster">
-      <picture class="welcome__poster-image">
-        <source srcset="@/assets/images/brand-logo.avif" type="image/avif" />
-        <source srcset="@/assets/images/brand-logo.webp" type="image/webp" />
-        <img src="@/assets/images/brand-logo.png" alt="logo" />
-      </picture>
-    </div>
-    <div class="welcome__info">
-      <picture class="welcome__info-poster" v-if="store.isDesktop">
-        <source srcset="@/assets/images/brand-logo.avif" type="image/avif" />
-        <source srcset="@/assets/images/brand-logo.webp" type="image/webp" />
-        <img src="@/assets/images/brand-logo.png" alt="logo" />
-      </picture>
-      <UICaption :size="sizes.XXL" class="welcome__title">Breeze</UICaption>
-      <UICaption :size="sizes.L" weight="normal" class="welcome__description">Weather App</UICaption>
+  <ThePage>
+    <div class="welcome">
+      <div class="welcome__poster">
+        <picture class="welcome__poster-image">
+          <source srcset="@/assets/images/brand-logo.avif" type="image/avif" />
+          <source srcset="@/assets/images/brand-logo.webp" type="image/webp" />
+          <img src="@/assets/images/brand-logo.png" alt="logo" />
+        </picture>
+      </div>
+      <div class="welcome__info">
+        <picture class="welcome__info-poster" v-if="store.isDesktop">
+          <source srcset="@/assets/images/brand-logo.avif" type="image/avif" />
+          <source srcset="@/assets/images/brand-logo.webp" type="image/webp" />
+          <img src="@/assets/images/brand-logo.png" alt="logo" />
+        </picture>
+        <UICaption is-accented :size="sizes.XXL" class="welcome__title">Breeze</UICaption>
+        <UICaption :size="sizes.L" weight="normal" class="welcome__description">Weather App</UICaption>
 
-      <UIButton class="welcome__button" @click="goToMainPage()" :disabled="!isWeatherDataValid">
-        <UIIcon name="arrow" v-if="store.isMobile" />
-        <UICaption v-else>Get started</UICaption>
-      </UIButton>
+        <UIButton class="welcome__button" @click="goToMainPage()" :disabled="!store.isWeatherDataValid">
+          <UIIcon name="arrow" v-if="store.isMobile" />
+          <UICaption v-else>Get started</UICaption>
+        </UIButton>
+      </div>
     </div>
-  </div>
+  </ThePage>
 </template>
 
 <style scoped lang="scss">
 .welcome {
   display: grid;
-  flex: 1;
   grid-template: 45% 55% / 100%;
-  min-height: 100%;
+  height: 100%;
 
   @include media('>sm') {
     grid-template: 100% / 45% 55%;
@@ -94,11 +91,7 @@ const isWeatherDataValid = computed(() => {
   }
 
   &__info-poster {
-    width: 5vw;
-  }
-
-  &__title {
-    color: var(--text-acceted);
+    width: 5dvw;
   }
 
   &__description {
@@ -110,7 +103,7 @@ const isWeatherDataValid = computed(() => {
   }
 
   &__button {
-    min-width: 11vw;
+    min-width: 11dvw;
     aspect-ratio: 1;
 
     @include media('>xxs') {
@@ -118,6 +111,10 @@ const isWeatherDataValid = computed(() => {
       aspect-ratio: auto;
       padding: 0.75rem 2.5rem;
     }
+  }
+
+  &__location {
+    cursor: pointer;
   }
 }
 </style>
