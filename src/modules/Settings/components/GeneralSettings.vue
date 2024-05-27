@@ -2,7 +2,7 @@
 import SettingsSection from '@/modules/Settings/components/SettingsSection.vue'
 import SettingsItemSwitch from '@/modules/Settings/components/SettingsItemSwitch.vue'
 import { settings } from '@/modules/Settings/constants/settings'
-import { type IWeatherStoreState } from '@/shared/store/weather'
+import type { ISharedStoreState } from '@/shared/store'
 import { useSharedStore } from '@/shared/store'
 
 const weatherStore = useSharedStore()
@@ -12,7 +12,7 @@ const getWeatherSetting = (storeKey: string) => {
 }
 
 const toggleWeatherSetting = (storeKey: string) => {
-  weatherStore.setStateValueByKey(storeKey as keyof IWeatherStoreState, !getWeatherSetting(storeKey))
+  weatherStore.setStateValueByKey(storeKey as keyof ISharedStoreState, !getWeatherSetting(storeKey))
 }
 </script>
 

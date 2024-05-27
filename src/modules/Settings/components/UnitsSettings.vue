@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import SettingsSection from '@/modules/Settings/components/SettingsSection.vue'
 import { settings } from '@/modules/Settings/constants/settings'
-import { type IWeatherStoreState } from '@/shared/store/weather'
+import type { ISharedStoreState } from '@/shared/store'
+import { useSharedStore } from '@/shared/store'
 import UICaption from '@/shared/components/UICaption.vue'
 import sizes from '@/shared/constants/sizes'
-import { useSharedStore } from '@/shared/store'
 
 const weatherStore = useSharedStore()
 
@@ -12,8 +12,8 @@ const getWeatherSetting = (storeKey: string) => {
   return weatherStore[storeKey as keyof typeof weatherStore]
 }
 
-const toggleWeatherSetting = (storeKey: string, value: IWeatherStoreState[keyof IWeatherStoreState]) => {
-  weatherStore.setStateValueByKey(storeKey as keyof IWeatherStoreState, value)
+const toggleWeatherSetting = (storeKey: string, value: ISharedStoreState[keyof ISharedStoreState]) => {
+  weatherStore.setStateValueByKey(storeKey as keyof ISharedStoreState, value)
 }
 </script>
 
