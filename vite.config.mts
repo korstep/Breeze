@@ -7,7 +7,6 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: 'https://korstep.github.io/Breeze/',
   plugins: [
     vue(),
     svgLoader({ defaultImport: 'component' }),
@@ -39,5 +38,6 @@ export default defineConfig({
         `
       }
     }
-  }
+  },
+  base: './'
 })
