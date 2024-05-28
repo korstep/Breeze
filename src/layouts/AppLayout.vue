@@ -6,7 +6,7 @@ import sizes from '@/shared/constants/sizes'
 <template>
   <div class="app-layout">
     <router-view></router-view>
-    <UICaption class="app-layout__author" :size="sizes.S">Developed by Stepan Korobeinikov</UICaption>
+    <UICaption class="app-layout__author" no-wrap :size="sizes.S">Developed by Stepan Korobeinikov</UICaption>
   </div>
 </template>
 
@@ -30,11 +30,11 @@ import sizes from '@/shared/constants/sizes'
     top: calc(var(--app-layout-padding) * 0.1);
     left: 50%;
     text-transform: unset;
-    transform: translateX(50%);
+    transform: translateX(-50%);
 
     @include media('>sm') {
-      right: 50%;
-      bottom: calc(var(--app-layout-padding) * 0.1);
+      inset: auto 50% calc(var(--app-layout-padding) * 0.1) auto;
+      transform: translateX(50%);
     }
   }
 }
