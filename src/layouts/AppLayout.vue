@@ -12,6 +12,8 @@ import sizes from '@/shared/constants/sizes'
 
 <style lang="scss">
 .app-layout {
+  position: relative;
+
   --app-layout-padding: 2.25dvw;
 
   height: fit-content;
@@ -25,10 +27,15 @@ import sizes from '@/shared/constants/sizes'
 
   &__author {
     position: absolute;
-    right: 50%;
-    bottom: calc(var(--app-layout-padding) * 0.1);
+    top: calc(var(--app-layout-padding) * 0.1);
+    left: 50%;
     text-transform: unset;
     transform: translateX(50%);
+
+    @include media('>sm') {
+      right: 50%;
+      bottom: calc(var(--app-layout-padding) * 0.1);
+    }
   }
 }
 </style>
